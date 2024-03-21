@@ -42,9 +42,22 @@ try:
     bsans = str(div_tag).split("videoimg")[1].split("og:image")[0].split("rowKey=")[1].split("_")[0]
     csans = f"https://vod-archive-kr-cdn-z01.afreecatv.com/v101/hls/evod/{bsans}/{asans}/{bsans}_evod2_{asans}.smil/original/both/"
 except:
-    asans = str(div_tag).split("save/afreeca/station/")[1].split(".")[0].split("_")[0].split("/thumb/")[0]
-    bsans = str(div_tag).split("save/afreeca/station/")[1].split("/thumb/")[1].split("_")[0]
-    csans = f"https://vod-normal-kr-cdn-z01.afreecatv.com/v101/hls/save/afreeca/station/{asans}/{bsans}.smil/original/both/"
+    try:
+        asans = str(div_tag).split("save/afreeca/station/")[1].split(".")[0].split("_")[0].split("/thumb/")[0]
+        bsans = str(div_tag).split("save/afreeca/station/")[1].split("/thumb/")[1].split("_")[0]
+        csans = f"https://vod-normal-kr-cdn-z01.afreecatv.com/v101/hls/save/afreeca/station/{asans}/{bsans}.smil/original/both/"
+    except:
+        try:
+            asans = str(div_tag).split("videoimg")[1].split("og:image")[0].split("_")[0].split("=")[-1]
+            bsans = str(div_tag).split("videoimg")[1].split("og:image")[0].split("_")[1].split("_")[0]
+            csans = f"https://vod-normal-kr-cdn-z01.afreecatv.com/v101/hls/review_clip/{asans}/{bsans}/{asans}_{bsans}_1.smil/original/both/"
+        except:
+            file = open('errorDebug.txt', "w")
+            file.write(div_tag)
+            file.close()
+            print("지원하지 않는 정보입니다")
+            print(f"이슈로 해당 URL을 보내주세요(스스로 해결하시려면, errorDebug.txt 파일을 확인해주세요) : {isnumber}")
+            quit()
 dsans = 70 # 처음부터 계산하면 너무 느리고, 404는 데이터 받는게 빠르게 때문에 70청크 부터 계산하는 효율적인 알고리즘 사용
 esans = 0
 fsans = 0
