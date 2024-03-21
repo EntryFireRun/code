@@ -5,7 +5,9 @@
 # 아프리카 tv가 업데이트 되면 제대로 실행이 안될 수 있습니다, 업데이트로 문제가 생기면 계속 계산하지 않고, 코드를 끝내도록 설계되었으나, 그것도 오류가 날 수 있으니, 이상하다 싶으면 알아서 끄세요
 # 중지는 Ctrl Z나 Ctrl C 로 가능합니다
 # 새 폴더에서 실행해주세요, 파일 이름 겹치면 파일을 잃거나 고장날 수 있습니다
-# 지원하는 VOD : 유저VOD, 업로드VOD, 유저 클립, 하일라이트
+# 지원하는 VOD : 유저VOD, 업로드VOD, 유저 클립
+# 지원 해야할 것 : https://vod-archive-kr-cdn-z01.afreecatv.com/v101/hls/highlight/20160822/207/bd72bbaa_180467207_1_2_A.mp4/original/both/seg-15.ts 하일라이트 https://vod.afreecatv.com/player/12047656
+# 캐시 : https://vod.afreecatv.com/player/116049503/catch https://vod-normal-kr-cdn-z01.afreecatv.com/v101/hls/clip/20240212/145/da9a8bc0-c7f8-432f-aa14-449079bdeb12/3164145.smil/original/both/seg-2.ts
 # 다시보기는 용량 문제로 지원하지 않을 예정 
 
 import urllib.request
@@ -58,22 +60,27 @@ except:
                 bsans = str(div_tag).split("videoimg")[1].split("og:image")[0].split("_")[1].split("_")[0] + "_" + str(div_tag).split("videoimg")[1].split("og:image")[0].split("_")[2].split("_")[0]
                 csans = "https://vod-archive-kr-cdn-z01.afreecatv.com/v101/hls/highlight/20160822/207/bd72bbaa_180467207_1_2_A.mp4/original/both/"
         except:
-            file = open('errorDebug.txt', "w")
-            file.write(div_tag)
-            file.close()
-            print("지원하지 않는 정보입니다")
-            print(f"이슈로 해당 URL을 보내주세요(스스로 해결하시려면, errorDebug.txt 파일을 확인해주세요) : {isnumber}")
-            quit()
-# print(asans)
-# print(bsans)
-# print(csans)
-# print(div_tag) 디버그 용 코드
-dsans = 70 # 처음부터 계산하면 너무 느리고, 404는 데이터 받는게 빠르게 때문에 70청크 부터 계산하는 효율적인 알고리즘 사용
+            try:
+                asans = str(div_tag).split("clip/")[1].split("_")[0]
+                csans = f"https://vod-normal-kr-cdn-z01.afreecatv.com/v101/hls/clip/{asans}.smil/original/both/"
+                bsans = "변수 재활용 개꿀ㅋ"
+            except:        
+                file = open('errorDebug.txt', "w")
+                file.write(div_tag)
+                file.close()
+                print("지원하지 않는 정보입니다")
+                print(f"이슈로 해당 URL을 보내주세요 : {isnumber}\n(스스로 해결하시려면, errorDebug.txt 파일을 확인해주세요)")
+                quit()
+if bsans == "변수 재활용 개꿀ㅋ":
+    hsans = 20
+else:
+    hsans = 70
+dsans = hsans # 처음부터 계산하면 너무 느리고, 404는 데이터 받는게 빠르게 때문에 70청크 부터 계산하는 효율적인 알고리즘 사용
 esans = 0
 fsans = 0
 while True:
     if requests.get(f"{csans}seg-{dsans}.ts").status_code == 200:
-        if dsans >= 70:
+        if dsans >= hsans:
             if esans == 1:
                 break
             else:
