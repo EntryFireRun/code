@@ -20,12 +20,13 @@ def save_video(video_url, a) :
         file.write(f"file 'chunk-{a}.ts'\n")
         file.close()
         gsans += os.path.getsize(save_name)
-        print(f"저장됨 : {save_name} / chunk-{dsans}.ts | 예상 용량 : {dsans*3}mb | 현재 용량 : {int(gsans/(1024*1024))}mb",end='\r')
+        print(f"저장됨 : {save_name} / chunk-{dsans}.ts | 예상 용량 : {int(dsans*gsans/(1024*1024)/(a+1))}mb | 현재 용량 : {int(gsans/(1024*1024))}mb  ",end='\r')
     except:
-        print("프로그램에 오류가 있어, 파일을 정리한 후 프로그램이 종료됩니다")
+        print("\n프로그램에 오류가 있어, 파일을 정리한 후 프로그램이 종료됩니다")
         os.remove("chunk-l.txt")
         for i in removeList:
             os.remove(i)
+        quit()
 
 isnumber = input("아프리카tv VOD 저장 프로그램입니다!\nVOD URL : ")
 wtfbro = input("저장할 파일 명 (확장자는 자동으로 mp4가 적용됩니다, 파일이 이미 있는 경우 제거됩니다) : ")
@@ -54,15 +55,15 @@ while True:
                 break
             else:
                 dsans += 10
-                print(f"영상 청크 검색 중... / 현재 검색된 개수 : {dsans}",end='\r')
+                print(f"영상 청크 검색 중... / 현재 검색된 개수 : {dsans} ",end='\r')
         else:
             break
     else:
         dsans -= 1
         esans = 1
-        print(f"영상 청크 검색 중... / 현재 검색된 개수 : {dsans}",end='\r')
+        print(f"영상 청크 검색 중... / 현재 검색된 개수 : {dsans} ",end='\r')
         if dsans == 0:
-            print("\n오류 : 검색 인덱스 범위 초과 : URL을 다시 확인해주세요,",end='\r')
+            print("\n오류 : 검색 인덱스 범위 초과 : URL을 다시 확인해주세요")
             quit()
 removeList = []
 gsans = 0
