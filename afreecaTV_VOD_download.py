@@ -107,6 +107,3 @@ for i in removeList:
     os.remove(i)
 os.system('cls')
 print(f"\"{wtfbro}.mp4\"파일이 생성되었습니다, 제대로 생성되지 못한 경우, 다시 시도해주세요")
-# https://vod.afreecatv.com/player/119563493 <== test URL
-# https://vod.afreecatv.com/player/119194463 <== test URL
-# https://vod.afreecatv.com/player/117210783 <== test URL
