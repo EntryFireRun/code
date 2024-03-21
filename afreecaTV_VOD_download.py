@@ -55,8 +55,9 @@ except:
             if requests.get(f"https://vod-normal-kr-cdn-z01.afreecatv.com/v101/hls/review_clip/{asans}/{bsans}/{asans}_{bsans}_1.smil/original/both/seg-0.ts").status_code == 200:
                 csans = f"https://vod-normal-kr-cdn-z01.afreecatv.com/v101/hls/review_clip/{asans}/{bsans}/{asans}_{bsans}_1.smil/original/both/"
             else:
-                bsans = str(div_tag).split("videoimg")[1].split("og:image")[0].split("_")[1].split("_")[0] + "_" + str(div_tag).split("videoimg")[1].split("og:image")[0].split("_")[2].split("_")[0]
-                csans = "https://vod-archive-kr-cdn-z01.afreecatv.com/v101/hls/highlight/20160822/207/bd72bbaa_180467207_1_2_A.mp4/original/both/"
+                bsans = str(div_tag).split("videoimg")[1].split("og:image")[0].split("_")[1].split("_")[0] + "_" + str(div_tag).split("videoimg")[1].split("og:image")[0].split("_")[2].split("_")[0] + "_" + str(div_tag).split("videoimg")[1].split("og:image")[0].split("_")[3].split("_")[0] + "_" + str(div_tag).split("videoimg")[1].split("og:image")[0].split("_")[4].split("_")[0]
+                csans = f"https://vod-archive-kr-cdn-z01.afreecatv.com/v101/hls/highlight/{asans}/{bsans[-7:-4]}/{bsans}_A.mp4/original/both/"
+                print(csans)
         except:
             try:
                 asans = str(div_tag).split("clip/")[1].split("_")[0]
