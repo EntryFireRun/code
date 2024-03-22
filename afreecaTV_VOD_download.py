@@ -6,7 +6,7 @@
 # 중지는 Ctrl Z나 Ctrl C 로 가능합니다
 # 새 폴더에서 실행해주세요, 파일 이름 겹치면 파일을 잃거나 고장날 수 있습니다
 # 지원하는 VOD : 유저VOD, 업로드VOD, 유저 클립, 하일라이트, 캐치
-# 다시보기는 용량 문제로 지원하지 않을 예정 (다운로드가 yt-dlp에 비해 훨씬 느리고 구린 알고리즘을 사용)
+# 다시보기는 용량 문제로 지원하지 않을 예정 (다운로드가 yt-dlp에 비해 훨씬 느리고 구린 알고리즘을 사용) / 라이브 다운로드는 지원하지 않습니다
 
 import urllib.request
 import os
@@ -62,12 +62,13 @@ except:
                 asans = str(div_tag).split("clip/")[1].split("_")[0]
                 csans = f"https://vod-normal-kr-cdn-z01.afreecatv.com/v101/hls/clip/{asans}.smil/original/both/"
                 bsans = "변수 재활용 개꿀ㅋ"
-            except:        
+            except:
+                os.system('cls')
                 file = open('errorDebug.txt', "w")
-                file.write(div_tag)
+                file.write(str(div_tag))
                 file.close()
                 print("지원하지 않는 정보입니다")
-                print(f"이슈로 해당 URL을 보내주세요 : {isnumber}\n(스스로 해결하시려면, errorDebug.txt 파일을 확인해주세요)")
+                print(f"이슈로 해당 URL을 보내주세요 : {isnumber}\n(\"errorDebug.txt\"파일이 필요할 수 있습니다)")
                 quit()
 if bsans == "변수 재활용 개꿀ㅋ":
     hsans = 20
