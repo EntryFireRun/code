@@ -24,7 +24,7 @@ def save_video(video_url, a) :
         gsans += os.path.getsize(save_name)
         print(f"저장됨 : {save_name} / chunk-{dsans}.ts | 예상 용량 : {int(dsans*gsans/(1024*1024)/(a+1))}mb | 현재 용량 : {int(gsans/(1024*1024))}mb  ",end='\r')
     except:
-        print("\n프로그램에 오류가 있어, 파일을 정리한 후 프로그램이 종료됩니다")
+        print("\n알 수 없는 오류 발생으로 자동으로 프로그램이 종료됩니다")
         os.remove("chunk-l.txt")
         for i in removeList:
             os.remove(i)
@@ -77,8 +77,13 @@ else:
 dsans = hsans # 처음부터 계산하면 너무 느리고, 404는 데이터 받는게 빠르게 때문에 70청크 부터 계산하는 효율적인 알고리즘 사용
 esans = 0
 fsans = 0
-if requests.get(f"{csans}/seg-0.ts").status_code == 404:
-    print("오류 발견 : 지원하지 않는 vod 형식입니다, 프로그램이 종료됩니다")
+if requests.get(f"{csans}seg-0.ts").status_code == 404:
+    os.system('cls')
+    file = open('errorDebug.txt', "w")
+    file.write(str(div_tag))
+    file.close()
+    print("지원하지 않는 정보입니다")
+    print(f"이슈로 해당 URL을 보내주세요 : {isnumber}\n(\"errorDebug.txt\"파일이 필요할 수 있습니다)")
     quit()
 while True:
     if requests.get(f"{csans}seg-{dsans}.ts").status_code == 200:
@@ -95,7 +100,12 @@ while True:
         esans = 1
         print(f"영상 청크 검색 중... / 현재 검색된 개수 : {dsans} ",end='\r')
         if dsans == 0:
-            print("\n오류 : 검색 인덱스 범위 초과 : URL을 다시 확인해주세요")
+            os.system('cls')
+            file = open('errorDebug.txt', "w")
+            file.write(str(div_tag))
+            file.close()
+            print("지원하지 않는 정보입니다")
+            print(f"이슈로 해당 URL을 보내주세요 : {isnumber}\n(\"errorDebug.txt\"파일이 필요할 수 있습니다)")
             quit()
 removeList = []
 gsans = 0
