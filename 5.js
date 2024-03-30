@@ -1,4 +1,4 @@
-wawasans = prompt("유저 아이디를 입력해주세요")
+wawasans = prompt("유저 아이디를 입력해주세요 ( 예 : 64b27bd05ebb6c00251dc5f5 )")
 wawawasans = new Date(parseInt(wawasans.slice(0, 7), 16)*1000).toString().split(" ")[0].replace("Mon", "월요일").replace("Tue", "화요일").replace("Wed", "수요일").replace("Thu", "목요일").replace("Fri", "금요일").replace("Sat", "토요일").replace("Sun", "일요일");
 function wasans(a) {
     alert(`${a.split("-")[0]}년 ${a.split("-")[1]}월 ${a.split("-")[2].split("T")[0]}일 ${wawawasans} ${parseInt(a.split("T")[1].split(":")[0])+9}시 ${a.split(":")[1]}분 ${a.split(":")[2].slice(0, -1)}초에 생성된 계정입니다 `)
