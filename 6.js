@@ -1,19 +1,17 @@
 wawasans = prompt("게시글 아이디를 입력해주세요 ( 예 : 6610125ebf238166bdb91dc0 )")
-wawawawawasans = ["* 유저가 좋아요를 취소하고 다시 누른 경우 마지막에 누른 값만 출력됩니다,\n당연한걸 왜 말하냐고요? 그것때문에 이 코드를 만들게 되었으니까요ㅠ"]
+wawawawawasans = ["000000000유저가 좋아요를 취소하고 다시 누른 경우 마지막에 누른 값만 출력됩니다,\n당연한걸 왜 말하냐고요? 그것때문에 이 코드를 만들게 되었으니까요ㅠ"]
 function wasans(a) {
-    console.log(a)
     a.filter((obj) => {
         wawawasans = new Date(parseInt(obj['id'].slice(0, 8), 16)*1000)
         wawawawasans = `${wawawasans.getFullYear()}년 ${wawawasans.getMonth()+1}월 ${wawawasans.getDate()}일 ${["일", "월", "화", "수", "목", "금", "토"][wawawasans.getDay()]}요일 ${wawawasans.getHours()}시 ${wawawasans.getMinutes()}분 ${wawawasans.getSeconds()}초`
     try {
         wawawawawasans.push(`${obj['id'].slice(0,8).toString()} ${wawawawasans.toString()}에 ${obj['user'].nickname.toString()}(${obj['user'].username.toString()})님이 좋아요를 눌렀습니다`);
-        // console.log(obj['user']);
     } catch {
         wawawawawasans.push(`${obj['id'].slice(0,8).toString()} ${wawawawasans.toString()}에 회원 탈퇴한 유저가 좋아요를 눌렀습니다`);
-        // console.log(obj['user']);
     }
     });
     wawawawawasans.sort()
+    console.log(`총 ${wawawawawasans.length}명이 해당 글에 좋아요를 눌렀습니다!`) // 처음에 이상한 쓰레기 값을 던져놓아서 +1할 필요 없음
     while (wawawawawasans.length != 0) {
         console.log(wawawawawasans[0].slice(9))
         wawawawawasans.shift()
