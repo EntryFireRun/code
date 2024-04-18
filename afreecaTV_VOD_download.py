@@ -115,7 +115,7 @@ if os.path.isfile(f"{wtfbro}.mp4"):
 for i in range(int(dsans) + 1):
     save_video(f"{csans}seg-{i}.ts", i)
     removeList.append(f"chunk-{i}.ts")
-os.system(f"ffmpeg -f concat -i chunk-l.txt -c copy {wtfbro}.mp4")
+os.system(f'ffmpeg -f concat -i chunk-l.txt -c copy "{wtfbro}".mp4')
 os.remove("chunk-l.txt")
 for i in removeList:
     os.remove(i)
