@@ -21,6 +21,7 @@ fetch("https://playentry.org/graphql", {
   .then((data) => {
       console.log(data.data.followers.list.length)
     for (let i = 0; i < (data.data.followers.list.length > 8 ? 8 : data.data.followers.list.length); i++) {
+document.querySelector('[type=mypage] > li:nth-child(4) > div > div > em').innerText -= 1
       fetch("https://playentry.org/graphql", {
         headers: {
           "content-type": "application/json",
